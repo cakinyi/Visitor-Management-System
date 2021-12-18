@@ -1,0 +1,151 @@
+﻿@model IEnumerable<VisitorManagement.Models.Products>
+
+@{ ViewData["Title"] = "Visitor Page"; }
+
+
+@{ if (TempData["res"] != null)
+    {
+   Layout = "./Admin_Layout.cshtml";
+<a align="right" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+<table class="table">
+<thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VisitingDate)
+        </th>
+        <th>
+            Approve/Reject
+        </th>
+        <th>
+            Status
+        </th>
+    </tr>
+</thead>
+<tbody>
+@foreach (var item in Model)
+{
+<tr>
+<td>
+    @Html.DisplayFor(modelItem => item.Name)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => item.Email)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => item.Phone)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => item.VisitingDate)
+</td>
+   <td>
+
+    @if (item.Status == Status.Rejected)
+    {
+    <a id="btnapprove" value="Approve" href="@Url.Action("Approve", new { item.ProductId })" onclick="return Approve();" class="btn btn-success">Approve</a>
+    }
+    else  if (item.Status == Status.Approved)
+    {
+    <a id="btnreject" value="Reject" href="@Url.Action("Reject", new { item.ProductId })" onclick="return Reject();" class="btn btn-danger">Reject</a>
+
+    }
+    else
+    {
+    <a id="btnapprove" value="Approve" href="@Url.Action("Approve", new { item.ProductId })" onclick="return Approve();" class="btn btn-success">Approve</a>
+    <a id="btnreject" value="Reject" href="@Url.Action("Reject", new { item.ProductId })" onclick="return Reject();" class="btn btn-danger">Reject</a>
+    }
+</td>
+<td>
+    @Html.DisplayFor(modelItem => item.Status)
+</td>
+</tr>}
+</tbody>
+</table> }
+else
+{
+<p>
+<a asp-action="Create">Create New Visiting Pass</a>
+</p>
+<p>
+<a asp-action="SortByDate">Sort Entries by Date</a>
+</p>
+                                
+<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VisitingDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VisitingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                @if (item.Status == Status.Approved)
+                {
+            <td>
+                <button>@Html.ActionLink("Download Pass", "ConvertToPDF", new { item.ProductId })</button>
+
+            </td>continue;
+                                }
+                @if (item.Status == Status.Rejected)
+                {
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+            </td>
+                    continue;
+                }
+                else
+                {
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+
+            </td>continue;
+                }
+            </tr>
+}
+        </tbody>
+    </table>
+} }
+

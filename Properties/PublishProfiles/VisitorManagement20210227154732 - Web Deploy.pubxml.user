@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAIawaIJCfSUOcGOPUYNkelAAAAAACAAAAAAAQZgAAAAEAACAAAACqhCB68lb6z4liAdoqDwYVpz19YWbSnMqMwj+wP4t30wAAAAAOgAAAAAIAACAAAAAHSVOic58gZSmlejF7oPrEutiDAB1ljGLdk+SfM0M4ZYAAAABIYZAoRY4bruFY13UvRmoj+NpJ7Y2uiCcgC+8DbIO57DqNMGNSynUFAKv2Cn4e67jK8oOy5M+kM6hEoUOZMxLE2UuNG2mvWvNifpzRqGsDsK1mUglhu7uSTnmAP6JClqWVbZru08EtA2OSPYcUUOnoC2mKTNfmCKyhFM2KgS/P30AAAAC6ywTmYwFGmhLd9SQhDAihVebPRK/oN904XJAcE0HTly/Gc2AYrG1d7orNckF82NyPELNJRrvGwyBTuAUV7ZmN</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="VisitorDatabase">
+      <Value>Data Source=tcp:VisitorManagementdbservers.database.windows.net,1433%3bInitial Catalog=VisitorManagement_db%3bUser Id=racrathi%40VisitorManagementdbservers%3bPassword=Rachit123</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="VisitorManagement.Models.VisitorContext">
+      <Value>Data Source=tcp:VisitorManagementdbservers.database.windows.net,1433%3bInitial Catalog=VisitorManagement_db%3bUser Id=racrathi%40VisitorManagementdbservers%3bPassword=Rachit123</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
