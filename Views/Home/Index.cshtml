@@ -1,6 +1,6 @@
-﻿@model VisitorManagement.Models.AdminLogin
+﻿@model VisitorManagement.Models.User
 
-@{ ViewData["Title"] = "Admin Page"; }
+@{ ViewData["Title"] = "Signup Page"; }
 
 <div class="container">
     <div class="row">
@@ -8,12 +8,16 @@
         <div class="col-sm-4">
             <form class="form-horizontal" asp-action="Index">
                 <div class="form-group">
-                    <label class="control-label">Admin ID</label>
-                    <input asp-for="Admin_id" class="form-control" type="text" />
+                    <label class="control-label">FullName</label>
+                    <input asp-for="Fullname" class="form-control" type="text" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <input asp-for="Email" class="form-control" type="text" />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Password</label>
-                    <input asp-for="Ad_Password" class="form-control" type="password" />
+                    <input asp-for="Password" class="form-control" type="password" />
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Submit" />

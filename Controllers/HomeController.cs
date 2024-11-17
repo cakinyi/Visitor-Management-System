@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using VisitorManagement.data;
 using VisitorManagement.Models;
 
 namespace VisitorManagement.Controllers
@@ -12,11 +13,12 @@ namespace VisitorManagement.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        AdminCheck adminCheck = new AdminCheck();
+        private readonly InventoryContextt Dbcontextt;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, InventoryContextt Dbcontextt)
         {
             _logger = logger;
+            Dbcontextt = Dbcontextt;
         }
 
         public IActionResult Index()
@@ -33,20 +35,11 @@ namespace VisitorManagement.Controllers
             return View();
         }
   
-        [HttpPost]
-        public IActionResult Index([Bind] AdminLogin ad)
-        {
-             int res = adminCheck.LoginCheck(ad);
-            if (res == 1)
-            {
-                TempData["res"] = res;
-                return RedirectToAction("Index", "Products");
-            }
-            else
-            {
-                TempData["msg"] = "Admin id or Password is wrong.!";
-            }
-            return View();
+       [HttpPost]
+        public ActionResult RegisterUser (User user){ 
+            Dbcontextt.User.Add(user);
+            Dbcontextt.SaveChanges();
+            return View(user);
         }
         public IActionResult adminpage()
         {

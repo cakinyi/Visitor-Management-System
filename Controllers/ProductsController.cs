@@ -4,23 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+
+using VisitorManagement.Repository;
+using VisitorManagement.Models;
+using VisitorManagement.data;
 using Microsoft.EntityFrameworkCore;
-using InventoryManagement.Models;
-using InventoryManagement.Repository;
-using Rotativa;
 using Rotativa.AspNetCore;
 
 namespace InventoryManagement.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly InventoryContext _context;
-        ProductRepository productRepository = new ProductRepository();
+        private readonly InventoryContextt _context;
+        private readonly ProductRepository productRepository;
+        //ProductRepository productRepository = new ProductRepository();
 
 
-        public ProductsController(InventoryContext context)
+        public ProductsController(InventoryContextt context,ProductRepository ProductRepository)
         {
             _context = context;
+            productRepository=ProductRepository;
         }
 
         // GET: Products
@@ -164,7 +167,7 @@ namespace InventoryManagement.Controllers
             }
 
             var products = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductId == id);
+            .FirstOrDefaultAsync(m => m.ProductId == id);
             if (products == null)
             {
                 return NotFound();

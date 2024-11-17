@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,6 +8,7 @@ namespace VisitorManagement.Models
 {
     public partial class Products
     {
+        [Key]
         public int ProductId { get; set; }
 
 
